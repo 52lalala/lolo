@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import OpenAI from 'openai';
 
 const BASE_URL = process.env.VOLCANO_BASE_URL || 'https://ark.cn-beijing.volces.com/api/v3';
