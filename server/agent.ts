@@ -12,8 +12,14 @@ let cachedTools: ToolDef[] | null = null;
 
 async function getTools(): Promise<ToolDef[]> {
   if (!cachedTools) {
-    cachedTools = await fetchTools();
-    console.log(`[lolo] 已加载 ${cachedTools.length} 个工具`);
+    try {
+      cachedTools = await fetchTools();
+      console.log(`[lolo] 已加载 ${cachedTools.length} 个工具`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.warn(`[lolo] Nodexa 不可用，本次降级为纯聊天模式: ${msg}`);
+      return [];
+    }
   }
   return cachedTools;
 }
